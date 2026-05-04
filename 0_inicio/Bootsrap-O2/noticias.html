@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticia - 0223</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+   <nav class="navbar navbar-dark">
+        <div class="container-fluid px-4">
+            
+            <a href="clima.html" class="text-white fw-bold fs-4 text-decoration-none">Clima 20°</a>
+            <a class="navbar-brand fw-bold fs-2" href="index.html">0223</a>
+            <a href="contacto.html" class="text-white fw-bold fs-4 text-decoration-none">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO NOTICIA -->
+    <div class="container mt-4 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <a href="index.html" class="btn btn-sm text-white mb-3 d-inline-flex align-items-center gap-1"
+                    style="background-color: #d6001c; border-radius: 15px;">
+                    ← Volver al inicio
+                </a>
+
+                <span id="noticia-categoria" class="badge text-white mb-2 d-block"
+                    style="background-color: #d6001c; width: fit-content;"></span>
+                <h1 id="noticia-titulo" class="fw-bold fs-2 mb-3"></h1>
+                <p class="text-muted small mb-3">📅 <span id="noticia-fecha"></span> &nbsp;|&nbsp; ✍️ Redacción 0223</p>
+                <img id="noticia-imagen" src="" class="img-fluid rounded shadow-sm mb-2 w-100" alt="">
+                <p id="noticia-epigrafe" class="text-muted small text-center mb-4"></p>
+                <div id="noticia-texto" class="fs-6 lh-lg text-dark"></div>
+
+                <hr class="my-4">
+                <a href="index.html" class="btn text-white"
+                    style="background-color: #d6001c; border-radius: 15px;">← Volver al inicio</a>
+            </div>
+        </div>
+
+        <!-- NOTICIAS RELACIONADAS -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="fw-bold mb-3 border-start border-4 ps-2" style="border-color: #d6001c !important;">Noticias relacionadas</h4>
+            </div>
+            <div id="relacionadas" class="row g-3"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="py-3 text-white d-flex justify-content-between px-4" style="background-color: #d6001c;">
+        <h3 class="fs-6 mb-0">Agustina Banegas</h3>
+        <h2 class="fs-6 mb-0">Noticias día a día</h2>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  
+  <script>
+       
+        const noticias = {
+            1: {
+                categoria: "Policiales",
+                titulo: "Identificaron al hombre que murió cuando nadaba en Cabo Corrientes",
+                fecha: "16 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773669987900.webp?cw=496&ch=304&cma=1&extw=jpeg",
+                epigrafe: "Vista del sector de Cabo Corrientes donde ocurrió el hecho.",
+                texto: `
+                    <p>Las autoridades lograron identificar este domingo al hombre que perdió la vida mientras nadaba en la zona de Cabo Corrientes, uno de los sectores de costa más concurridos de Mar del Plata. El hecho ocurrió durante la tarde del sábado y generó una intensa labor de rescate por parte de los guardavidas y efectivos de Prefectura Naval Argentina.</p>
+                    <p>Según informaron fuentes policiales, la víctima es un hombre de mediana edad oriundo de la ciudad de Buenos Aires que se encontraba de visita en la ciudad. Testigos presentes en la playa indicaron que el hombre ingresó al agua en un sector donde las condiciones del mar eran desfavorables, con olas de considerable tamaño y una fuerte corriente de resaca.</p>
+                    <p>Los guardavidas intentaron asistirlo rápidamente al notar que la persona se encontraba en dificultades, pero el hombre fue arrastrado por la corriente antes de que pudieran alcanzarlo. Minutos después fue hallado inconsciente y trasladado de urgencia al Hospital Interzonal General de Agudos (HIGA), donde ingresó sin signos vitales.</p>
+                    <p>Desde la Municipalidad recordaron a los bañistas la importancia de respetar las indicaciones de los guardavidas y de no ingresar al mar cuando las banderas indican peligro.</p>`
+            },
+            2: {
+                categoria: "Policiales",
+                titulo: "Motochorros armados se hicieron pasar por reparadores y asaltaron una panadería",
+                fecha: "16 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773689428688.webp?cw=1110&ch=432&cma=1&extw=jpeg",
+                epigrafe: "La panadería donde ocurrió el violento asalto.",
+                texto: `
+                    <p>Un grupo de motochorros armados utilizó una táctica de engaño para ingresar a una panadería y asaltar a sus empleados. Los delincuentes se presentaron haciéndose pasar por técnicos de una empresa de reparaciones, logrando que el personal les abriera la puerta sin sospechas.</p>
+                    <p>Una vez adentro, sacaron armas de fuego y sometieron a los trabajadores presentes, quienes fueron obligados a tirarse al piso mientras los ladrones vaciaban la caja y se apoderaban de pertenencias personales.</p>
+                    <p>Uno de los empleados declaró que en ningún momento imaginó que eran delincuentes. "Tenían ropa de trabajo y herramientas, parecían profesionales", señaló. Afortunadamente nadie resultó herido físicamente.</p>
+                    <p>Efectivos de la Comisaría 4ta iniciaron una investigación para dar con los autores del hecho.</p>`
+            },
+            3: {
+                categoria: "Deportes",
+                titulo: "Aldosivi sigue sin ganar: empató con Huracán en el Minella",
+                fecha: "16 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773692896390.webp?cw=1110&ch=432&cma=1&extw=jpeg",
+                epigrafe: "El estadio José María Minella durante el partido.",
+                texto: `
+                    <p>Aldosivi no pudo con Huracán y firmó un nuevo empate en el Estadio José María Minella, resultado que lo mantiene sin victorias en lo que va del torneo. El partido terminó 1 a 1 con goles que generaron emociones de ambos lados.</p>
+                    <p>El Tiburón abrió el marcador en el primer tiempo con una conquista de cabeza. Sin embargo, Huracán reaccionó rápido y antes del descanso logró igualar con un remate de media distancia que sorprendió al arquero local.</p>
+                    <p>En el complemento, Aldosivi buscó el triunfo con mayor insistencia pero le faltó profundidad. El técnico reconoció que el equipo necesita mejorar en la definición.</p>
+                    <p>Con este resultado, el club acumula varios partidos sin ganar y la presión sobre el cuerpo técnico empieza a crecer.</p>`
+            },
+            4: {
+                categoria: "Transporte",
+                titulo: "Avanza el cambio de recorrido: siete líneas de colectivos volverán a pasar por Belgrano",
+                fecha: "15 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/112021/1636999314292.webp?cw=496&ch=304&cma=1&extw=jpeg",
+                epigrafe: "Colectivos en la avenida Belgrano.",
+                texto: `
+                    <p>La Municipalidad confirmó que avanza el plan para modificar los recorridos de siete líneas de colectivos que volverán a circular por la avenida Belgrano, respondiendo a los reclamos de comerciantes y vecinos.</p>
+                    <p>El cambio busca mejorar la conectividad del centro con los barrios del norte y sur de la ciudad. Las modificaciones entrarán en vigencia la semana próxima de forma escalonada.</p>
+                    <p>Se habilitarán nuevas paradas y se ajustarán los horarios para evitar superposición entre líneas. Los choferes ya fueron informados y los carteles de las unidades serán actualizados antes del inicio de los cambios.</p>`
+            },
+            5: {
+                categoria: "Economía",
+                titulo: "El dólar oficial cayó y anotó la mayor distancia con el techo de la banda",
+                fecha: "15 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/122024/1735241858497.webp?cw=496&ch=304&cma=1&extw=webp",
+                epigrafe: "El mercado cambiario registró importantes movimientos.",
+                texto: `
+                    <p>El tipo de cambio oficial retrocedió este lunes y amplió la brecha con el techo de la banda cambiaria establecida por el Banco Central, en una jornada marcada por la cautela de los operadores.</p>
+                    <p>El dólar mayorista cerró a $1.087, lo que representa una caída de casi $15 respecto al cierre anterior. La cotización se aleja así del límite superior de la banda de flotación, que se ubica en torno a los $1.100.</p>
+                    <p>Analistas señalaron que la baja responde en parte a una mayor liquidación de divisas por parte del agro. En el mercado paralelo, el dólar blue se mantuvo estable.</p>`
+            },
+            6: {
+                categoria: "Sociedad",
+                titulo: "La Patrulla Municipal intervino por dos hombres que acampaban en Alem",
+                fecha: "15 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773691326096.webp?cw=496&ch=304&cma=1&extw=jpeg",
+                epigrafe: "La avenida Alem, donde se realizó la intervención.",
+                texto: `
+                    <p>Personal de la Patrulla Municipal debió intervenir en la avenida Alem al encontrar a dos hombres que habían montado un improvisado campamento en la vía pública. La situación fue reportada por vecinos del sector.</p>
+                    <p>Los agentes constataron que ambas personas se encontraban en situación de calle desde hace varios días. Uno de ellos fue trasladado al Hospital Interzonal para recibir atención médica, y el otro fue derivado a un refugio municipal.</p>
+                    <p>Desde la Secretaría de Desarrollo Social indicaron que el número de personas en situación de calle creció un 18% respecto al mismo período del año anterior, atribuido a la crisis económica y el aumento en el costo de los alquileres.</p>`
+            },
+            7: {
+                categoria: "Inseguridad",
+                titulo: "Quedó filmado: saltó la reja y robó pertenencias de un auto",
+                fecha: "14 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773686118263.webp?cw=496&ch=304&cma=1&extw=jpg",
+                epigrafe: "Imagen captada por la cámara de seguridad.",
+                texto: `
+                    <p>Las cámaras de seguridad de un domicilio particular captaron el momento exacto en que un ladrón saltó la reja del garaje y forzó la apertura de un automóvil estacionado, del que sustrajo diversas pertenencias en cuestión de minutos.</p>
+                    <p>El hecho ocurrió durante la madrugada en el barrio de Güemes. El propietario descubrió el robo a la mañana siguiente al notar que la ventanilla estaba rota. En las imágenes se observa a un hombre joven que actúa con rapidez y sin cubrirse el rostro.</p>
+                    <p>El video fue entregado a la policía y ya circula en grupos vecinales. La División Investigaciones trabaja para identificar al sospechoso.</p>`
+            },
+            8: {
+                categoria: "Tiempo",
+                titulo: "Emiten aviso a muy corto plazo por tormentas fuertes en Mar del Plata",
+                fecha: "14 de marzo de 2026",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgs6cky4a0zPiqxcsmEMItH2fWdcI0WTfmfg&s",
+                epigrafe: "El cielo se cerró sobre Mar del Plata.",
+                texto: `
+                    <p>El Servicio Meteorológico Nacional emitió un aviso a muy corto plazo para Mar del Plata, alertando sobre la posibilidad de tormentas fuertes con granizo, ráfagas de viento y abundante caída de agua en las próximas horas.</p>
+                    <p>Desde Defensa Civil se recomienda a los vecinos evitar circular innecesariamente, alejarse de árboles y postes durante la tormenta y no intentar cruzar zonas anegadas con vehículos.</p>
+                    <p>Las escuelas no suspenderán sus actividades por el momento, aunque el municipio monitorea la situación. Se espera que el episodio meteorológico se disipe antes de la madrugada.</p>`
+            },
+            9: {
+                categoria: "Alerta naranja",
+                titulo: "Alerta Meteorológico en Mar del Plata: qué pasa con las clases",
+                fecha: "13 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773657558415.webp?cw=736&ch=400&cma=1&extw=jpg",
+                epigrafe: "Alerta naranja activa para la región.",
+                texto: `
+                    <p>El Servicio Meteorológico Nacional declaró alerta naranja para Mar del Plata ante la inminencia de un sistema de tormentas severas que podría traer granizo, vientos superiores a los 80 km/h y precipitaciones que podrían superar los 80 milímetros en pocas horas.</p>
+                    <p>Ante la gravedad del pronóstico, la Dirección General de Educación informó que las clases quedarán suspendidas tanto en el nivel inicial, primario y secundario. La medida alcanza a establecimientos públicos y privados de toda la ciudad.</p>
+                    <p>Desde la intendencia se convocó a una reunión de emergencia del Comité de Gestión de Riesgo para coordinar la respuesta ante posibles inundaciones.</p>`
+            },
+            10: {
+                categoria: "Tragedia",
+                titulo: "Su camión comenzó a desplazarse hacia atrás y aplastó contra otro",
+                fecha: "13 de marzo de 2026",
+                imagen: "https://pxcdn.0223.com.ar/f/032026/1773672193113.webp?cw=496&ch=304&cma=1&extw=jpeg",
+                epigrafe: "El accidente ocurrió en una zona de carga y descarga.",
+                texto: `
+                    <p>Un accidente protagonizado por dos camiones de gran porte dejó importantes daños materiales y un herido de gravedad en una zona industrial. El hecho ocurrió cuando uno de los vehículos comenzó a desplazarse hacia atrás de forma inesperada y colisionó contra el otro.</p>
+                    <p>El conductor habría descendido de la cabina sin colocar correctamente el freno de mano. El vehículo fue tomando velocidad hasta impactar contra el segundo camión. El conductor del camión estacionado quedó atrapado entre ambos rodados y debió ser rescatado por Bomberos.</p>
+                    <p>La víctima fue trasladada en estado crítico al Hospital Interzonal. La Policía Científica intervino en el lugar para determinar las causas exactas del siniestro.</p>`
+            }
+        };
+
+       
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get("id"));
+        const noticia = noticias[id];
+
+        if (noticia) {
+            document.title = noticia.titulo + " - 0223";
+            document.getElementById("noticia-categoria").textContent = noticia.categoria;
+            document.getElementById("noticia-titulo").textContent = noticia.titulo;
+            document.getElementById("noticia-fecha").textContent = noticia.fecha;
+            document.getElementById("noticia-imagen").src = noticia.imagen;
+            document.getElementById("noticia-imagen").alt = noticia.titulo;
+            document.getElementById("noticia-epigrafe").textContent = noticia.epigrafe;
+            document.getElementById("noticia-texto").innerHTML = noticia.texto;
+        } else {
+            document.getElementById("noticia-titulo").textContent = "Noticia no encontrada.";
+            document.getElementById("noticia-texto").innerHTML = "<p>El contenido que buscás no está disponible. <a href='index.html'>Volvé al inicio</a>.</p>";
+        }
+
+      
+        const contenedor = document.getElementById("relacionadas");
+        const otras = Object.entries(noticias).filter(([key]) => parseInt(key) !== id).slice(0, 4);
+
+        otras.forEach(([key, n]) => {
+            contenedor.innerHTML += `
+                <div class="col-sm-6 col-md-3">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="${n.imagen}" class="card-img-top rounded-top" alt="${n.titulo}">
+                        <div class="card-body p-2">
+                            <span class="text-muted small">${n.categoria}</span>
+                            <p class="card-text small mt-1 fw-semibold">${n.titulo}</p>
+                            <a href="noticias.html?id=${key}" class="btn btn-sm text-white"
+                                style="background-color: #d6001c; border-radius: 15px;">Ver más</a>
+                        </div>
+                    </div>
+                </div>`;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+#links-container .custom-link {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+    color: #4f46e5;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#links-container .custom-link:hover {
+    background-color: #eef2ff;
+    border-color: #4f46e5;
+}
+
+.log-entry {
+    padding: 4px 8px;
+    border-left: 3px solid #ffc107;
+    margin-bottom: 5px;
+    background: #fdfdfd;
+}
+
+.log-entry .attr { font-weight: bold; color: #d63384; }
+.log-entry .val { color: #198754; }

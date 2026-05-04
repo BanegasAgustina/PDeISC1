@@ -1,0 +1,45 @@
+.navbar{
+    background-color: #d6001c;
+}
+
+.col-12 a{
+background-color: #d6001c; 
+border-radius: 15px;
+}
+.col a{
+background-color: #d6001c; 
+border-radius: 15px;
+}
+
+.col a:hover{
+    background-color: #ff2d49; 
+    border-radius: 15px;
+}
+
+.col-12 a:hover{
+    background-color: #ff2d49; 
+    border-radius: 15px;
+}
+
+
+footer{
+    background-color: #d6001c;
+}
+
+.btn {
+    background: #d6001c;
+    color: #ffff;
+
+}
+
+form{
+    margin-top: 50px;
+}
+
+ label {
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: #000000;
+            margin-bottom: 0.4rem;
+        }
+

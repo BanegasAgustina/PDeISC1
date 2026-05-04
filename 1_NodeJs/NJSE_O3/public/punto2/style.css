@@ -1,0 +1,44 @@
+.interaction-box {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    user-select: none;
+}
+
+.interaction-box.circle {
+    border-radius: 50%;
+    background-color: #e91e63 !important;
+    transform: rotate(360deg);
+}
+
+.card-interaction {
+    transition: background-color 0.3s;
+    border-radius: 15px;
+    cursor: default;
+}
+
+.card-interaction:hover {
+    background-color: #d1e7dd !important;
+}
+
+.border-dashed {
+    border: 3px dashed #ccc;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+.border-dashed.dragover {
+    border-color: #0dcaf0;
+    background-color: #f0faff;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+#comp-container {
+    min-height: 400px;
+}

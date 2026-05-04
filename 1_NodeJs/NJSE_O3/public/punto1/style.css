@@ -1,0 +1,32 @@
+body {
+    transition: background-color 0.3s;
+}
+
+#output-area {
+    min-height: 400px;
+    background-color: #fcfcfc;
+    border: 2px dashed #eee;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#h1-target {
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#img-target {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.min-vh-50 {
+    min-height: 50vh;
+}
+
+.btn i {
+    margin-right: 5px;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "nodejs_proyecto",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Proyecto Node.js con módulos propios, HTTP, FS, URL y NPM",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "calculadora": "node demos/demo_calculadora.js",
+    "reloj": "node demos/demo_reloj.js",
+    "clima": "node demos/demo_clima.js",
+    "url": "node demos/demo_url.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "upper-case": "^2.0.2"
+  }
+}

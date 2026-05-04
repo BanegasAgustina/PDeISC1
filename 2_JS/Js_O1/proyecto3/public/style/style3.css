@@ -1,0 +1,74 @@
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --bg-light: #f4f7f6;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: #333;
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Listado de Personas */
+.person-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    border-left: 5px solid var(--primary-color);
+    transition: transform 0.2s;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.person-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.person-info small {
+    display: block;
+    color: #777;
+    font-size: 0.8rem;
+}
+
+/* Botón Scroll Top */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+#scrollTopBtn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 0 20px; }
+}

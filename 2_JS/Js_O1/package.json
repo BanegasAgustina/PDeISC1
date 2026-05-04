@@ -1,0 +1,20 @@
+{
+  "name": "js_o1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node proyecto1/server.js",
+    "start2": "node proyecto2/server2.js",
+    "start3": "node proyecto3/server3.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

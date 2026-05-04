@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeopleDB | Almacén de Personas</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/style/style3.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fas fa-users-cog me-2"></i>PeopleDB</a>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row g-4">
+            <!-- Formulario de Registro -->
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0 rounded-4 p-4">
+                    <h4 class="fw-bold mb-4 text-primary">Registro de Datos Personales</h4>
+                    <form id="formPersona" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control"
+                                    placeholder="Solo letras" required>
+                                <div class="invalid-feedback">Ingresa un nombre válido (solo letras).</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Apellido</label>
+                                <input type="text" id="apellido" name="apellido" class="form-control"
+                                    placeholder="Solo letras" required>
+                                <div class="invalid-feedback">Ingresa un apellido válido (solo letras).</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Edad</label>
+                                <input type="number" id="edad" name="edad" class="form-control" min="1" max="120"
+                                    required>
+                                <div class="invalid-feedback">Edad entre 1 y 120.</div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold">Fecha de Nacimiento</label>
+                                <input type="date" id="fechaNac" name="fechaNac" class="form-control" required>
+                                <div class="invalid-feedback">Selecciona una fecha.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Sexo</label>
+                                <select id="sexo" name="sexo" class="form-select" required>
+                                    <option value="" disabled selected>Elegir...</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una opción.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Documento (DNI)</label>
+                                <input type="text" id="dni" name="dni" class="form-control" placeholder="Solo números"
+                                    required>
+                                <div class="invalid-feedback">DNI obligatorio (solo números).</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Estado Civil</label>
+                                <select id="estadoCivil" name="estadoCivil" class="form-select" required>
+                                    <option value="" disabled selected>Elegir...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona tu estado.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nacionalidad</label>
+                                <input type="text" id="nacionalidad" name="nacionalidad" class="form-control"
+                                    placeholder="Solo letras" required>
+                                <div class="invalid-feedback">Nacionalidad obligatoria.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" class="form-control"
+                                    placeholder="Solo números" required>
+                                <div class="invalid-feedback">Teléfono obligatorio.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Mail</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                    placeholder="correo@ejemplo.com" required>
+                                <div class="invalid-feedback">Email inválido.</div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="tieneHijos" name="tieneHijos">
+                                    <label class="form-check-label fw-semibold" for="tieneHijos">¿Tiene hijos?</label>
+                                </div>
+                                <div id="contenedorCantHijos" class="d-none">
+                                    <label class="form-label small fw-bold text-muted">CANTIDAD DE HIJOS</label>
+                                    <input type="number" id="cantHijos" name="cantHijos" class="form-control" min="1"
+                                        value="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="statusMsg" class="mt-4"></div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-3 mt-4 fw-bold rounded-3 shadow">
+                            <i class="fas fa-user-plus me-2"></i>GUARDAR EN LOCALSTORAGE
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Listado de Personas -->
+            <div class="col-lg-6">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0 text-secondary">Personas Registradas</h4>
+                    <button id="limpiarDB" class="btn btn-outline-danger btn-sm">
+                        <i class="fas fa-trash-alt me-1"></i>Limpiar Todo
+                    </button>
+                </div>
+
+                <div id="listaPersonas" class="row row-cols-1 g-3">
+                    <!-- Dinámico -->
+                </div>
+
+                <div id="emptyMsg" class="text-center py-5">
+                    <i class="fas fa-address-book fa-4x text-light mb-3"></i>
+                    <p class="text-muted">No hay personas registradas en el almacén local.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Botón Ir al Inicio -->
+    <button id="scrollTopBtn" class="btn btn-primary rounded-circle shadow-lg" title="Ir al inicio">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="/script/proyecto3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+</body>
+
+</html>

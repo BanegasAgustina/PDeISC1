@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Luxury Hotel & Spa | Gestión de Reservas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-hotel me-2"></i>LUXURY HOTEL
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="overlay"></div>
+    <div
+      class="container h-100 d-flex align-items-center justify-content-center text-center text-white position-relative">
+      <div>
+        <h1 class="display-3 fw-bold mb-3">Reserva tu Experiencia</h1>
+        <p class="lead mb-4">Elegancia, confort y exclusividad en cada detalle.</p>
+        <a href="#booking-section" class="btn btn-outline-light btn-lg px-5 rounded-pill">Reservar Ahora</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5 py-5" id="booking-section">
+    <div class="row g-5">
+      <!-- Columna Formulario -->
+      <div class="col-lg-5">
+        <div class="card border-0 shadow-lg p-4">
+          <div class="card-body">
+            <h3 class="card-title mb-4 text-center fw-bold">Nueva Reserva</h3>
+
+            <!-- Progress Bar -->
+            <div class="progress mb-4" style="height: 8px;">
+              <div id="form-progress" class="progress-bar bg-dark" role="progressbar" style="width: 50%;"></div>
+            </div>
+
+            <form id="formReserva" novalidate>
+
+              <!-- PASO 1: Datos Personales -->
+              <div id="step-1" class="form-step">
+                <h5 class="mb-3 text-muted fw-bold small uppercase">PASO 1: DATOS PERSONALES</h5>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Nombre Completo</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                    <input type="text" id="nombre" name="nombre" class="form-control bg-light border-start-0"
+                      placeholder="Solo letras" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Correo Electrónico</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i
+                        class="fas fa-envelope text-muted"></i></span>
+                    <input type="email" id="email" name="email" class="form-control bg-light border-start-0"
+                      placeholder="correo@ejemplo.com" required>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Teléfono</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-phone text-muted"></i></span>
+                    <input type="tel" id="telefono" name="telefono" class="form-control bg-light border-start-0"
+                      placeholder="+54..." required>
+                  </div>
+                </div>
+
+                <button type="button" id="next-step" class="btn btn-dark w-100 py-3 fw-bold rounded-3">
+                  SIGUIENTE <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+
+              <!-- PASO 2: Detalles de Reserva -->
+              <div id="step-2" class="form-step d-none">
+                <h5 class="mb-3 text-muted fw-bold small uppercase">PASO 2: DETALLES DE ESTADÍA</h5>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Check-in</label>
+                    <input type="date" id="checkin" name="checkin" class="form-control bg-light" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Check-out</label>
+                    <input type="date" id="checkout" name="checkout" class="form-control bg-light" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Habitación</label>
+                  <select id="habitacion" name="habitacion" class="form-select bg-light" required>
+                    <option value="" selected disabled>Seleccionar...</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Suite">Suite Presidencial</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Huéspedes</label>
+                  <select id="huespedes" name="huespedes" class="form-select bg-light" required>
+                    <option value="1">1 Persona</option>
+                    <option value="2" selected>2 Personas</option>
+                    <option value="3">3 Personas</option>
+                  </select>
+                </div>
+
+                <div id="info-noches" class="mb-4 d-none">
+                  <div class="alert alert-info py-2 px-3 mb-0 d-flex justify-content-between align-items-center">
+                    <strong id="noches-display">0 noches</strong>
+                    <input type="hidden" id="noches" name="noches" value="0">
+                  </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button type="button" id="prev-step" class="btn btn-outline-secondary py-3 px-4">
+                    <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <button type="submit" class="btn btn-dark flex-grow-1 py-3 fw-bold rounded-3 shadow-sm hover-lift">
+                    CONFIRMAR RESERVA <i class="fas fa-paper-plane ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div id="mensaje" class="mt-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Lista de Reservas -->
+      <div class="col-lg-7">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-bold m-0"><i class="fas fa-clipboard-list me-2 text-primary"></i>Reservas Recientes</h3>
+          <span class="badge bg-dark rounded-pill px-3" id="contador">0 Reservas</span>
+        </div>
+
+        <div class="list-container">
+          <ul id="lista" class="list-group list-group-flush shadow-sm rounded-4 overflow-hidden">
+            <!-- Las reservas se cargan dinámicamente -->
+          </ul>
+        </div>
+
+        <div id="empty-state" class="text-center py-5 d-none">
+          <i class="fas fa-calendar-times fa-4x text-light mb-3"></i>
+          <p class="text-muted">No hay reservas registradas actualmente.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2024 Luxury Hotel & Spa. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón Ir al Inicio -->
+  <button id="scrollTopBtn" class="btn btn-dark rounded-circle shadow-lg" title="Ir al inicio">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="/script/proyecto1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

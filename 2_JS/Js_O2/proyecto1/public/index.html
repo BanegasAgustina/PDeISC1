@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Números</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ingreso de Números</h1>
+            <button id="toggleTemaBtn" class="toggle-tema">
+                <span id="temaIcono">🌙</span>
+            </button>
+        </div>
+
+        <div class="contenido-principal">
+            <div class="columna-izquierda">
+                <div class="input-section">
+                    <label for="numero">Ingrese un número:</label>
+                    <input type="number" id="numero" placeholder="Escriba un número">
+                    <button id="agregarBtn">Agregar</button>
+                </div>
+
+                <div class="numbers-display numbers-display-mobile" id="numbersDisplayMobile">
+                    <h3>Números ingresados:</h3>
+                    <ul id="numbersListMobile"></ul>
+                </div>
+
+                <div class="status">
+                    <p>Números ingresados: <span id="contador">0</span> (mínimo 10, máximo 20)</p>
+                </div>
+
+                <div class="actions">
+                    <button id="guardarBtn" disabled>Guardar en archivo TXT</button>
+                    <button id="reiniciarBtn">Reiniciar</button>
+                </div>
+
+                <div id="message" class="message"></div>
+            </div>
+
+            <div class="columna-derecha">
+                <div class="seccion-archivos">
+                    <div class="lista-archivos">
+                        <h3>Archivos guardados:</h3>
+                        <ul id="archivosList"></ul>
+                    </div>
+                    <div class="contenido-archivo">
+                        <h3 id="nombreArchivoSeleccionado">Selecciona un archivo</h3>
+                        <ul id="numerosArchivoList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para reiniciar -->
+    <div id="confirmacionModal" class="modal">
+        <div class="modal-contenido">
+            <h3>¿Está seguro?</h3>
+            <p>Se perderán todos los números ingresados.</p>
+            <div class="modal-botones">
+                <button id="confirmarSiBtn" class="modal-btn si">Sí, reiniciar</button>
+                <button id="confirmarNoBtn" class="modal-btn no">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="volverArribaBtn" class="volver-arriba">↑</button>
+
+    <script src="context/temacontext.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrado de Números</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-center flex-grow-1">Filtrado de Números</h1>
+            <button id="toggleTemaBtn" class="toggle-tema btn">
+                <span id="temaIcono">🌙</span>
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Subir Archivo TXT</h5>
+                        <div class="mb-3">
+                            <label for="archivoInput" class="form-label">Selecciona un archivo TXT con números:</label>
+                            <input type="file" id="archivoInput" class="form-control" accept=".txt">
+                        </div>
+                        <button id="cargarBtn" class="btn btn-primary w-100" disabled>Cargar y Filtrar</button>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Archivos Subidos</h5>
+                        <div id="archivosLista" class="archivos-lista">
+                            <p class="text-muted text-center">No hay archivos subidos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Estadísticas</h5>
+                        <div class="row text-center g-3">
+                            <div class="col-12 col-sm-4">
+                                <div class="stat-box h-100">
+                                    <div class="stat-number" id="totalContador">0</div>
+                                    <div class="stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="stat-box utiles h-100">
+                                    <div class="stat-number" id="utilesContador">0</div>
+                                    <div class="stat-label">Útiles</div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="stat-box no-utiles h-100">
+                                    <div class="stat-number" id="noUtilesContador">0</div>
+                                    <div class="stat-label">No Útiles</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <div class="porcentaje-display">
+                                <span id="porcentajeTexto">0%</span> de números útiles
+                            </div>
+                            <div class="progress mt-2" style="height: 25px;">
+                                <div id="porcentajeBarra"
+                                    class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%;">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="guardarBtn" class="btn btn-success w-100 mt-3" disabled>Guardar Resultados en
+                            TXT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="titulo-principal">Números Útiles</span>
+                                    <span class="titulo-secundario">(empiezan y terminan con el mismo dígito)</span>
+                                </h5>
+                                <div id="resultadosLista" class="resultados-lista">
+                                    <p class="text-muted text-center">Carga un archivo para ver los resultados</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Contenido del Archivo Seleccionado</h5>
+                                <div id="contenidoArchivo" class="contenido-archivo">
+                                    <p class="text-muted text-center">Selecciona un archivo para ver su contenido</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="message mt-4"></div>
+    </div>
+
+    <button id="volverArribaBtn" class="volver-arriba">
+        <span>↑</span>
+    </button>
+
+    <script src="context/temacontext.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

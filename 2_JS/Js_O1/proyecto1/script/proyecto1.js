@@ -1,7 +1,3 @@
-/**
- * 🏨 LUXURY HOTEL - GESTIÓN DE RESERVAS PROFESIONAL
- * Formulario Multi-paso | 100% Dinámico | Validaciones Estrictas
- */
 
 const form = document.getElementById("formReserva");
 const lista = document.getElementById("lista");
@@ -136,19 +132,19 @@ form.addEventListener("submit", async (e) => {
 
   console.log("--- INICIANDO LECTURA DE DATOS (3 MÉTODOS) ---");
 
-  // 🔹 MÉTODO 1: Acceso Directo por ID (document.getElementById)
+  // MÉTODO 1: Acceso Directo por ID (document.getElementById)
   // Se utiliza para campos específicos que tienen un ID único.
   const nombre = document.getElementById("nombre").value;
   const email = document.getElementById("email").value;
   console.log("Método 1 (ID) -> Nombre:", nombre, "| Email:", email);
 
-  // 🔹 MÉTODO 2: Colección 'elements' del Formulario (Acceso por propiedad name)
+  // MÉTODO 2: Colección 'elements' del Formulario (Acceso por propiedad name)
   // Se utiliza para acceder a los campos a través del objeto del formulario.
   const telefono = form.elements["telefono"].value;
   const habitacion = form.elements["habitacion"].value;
   console.log("Método 2 (Elements) -> Tel:", telefono, "| Hab:", habitacion);
 
-  // 🔹 MÉTODO 3: API 'FormData' (Objeto moderno y escalable)
+  // MÉTODO 3: API 'FormData' (Objeto moderno y escalable)
   // Ideal para procesar todos los campos de forma masiva o enviar archivos.
   const formData = new FormData(form);
   const huespedes = formData.get("huespedes");

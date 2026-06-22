@@ -1,0 +1,16 @@
+{
+  "name": "actividades-api-bootstrap",
+  "version": "1.0.0",
+  "description": "Cuatro actividades independientes con JavaScript, Bootstrap y Node.js para consumir APIs.",
+  "type": "module",
+  "scripts": {
+    "actividad1": "node actividad1/server.js",
+    "actividad2": "node actividad2/server.js",
+    "actividad3": "node actividad3/server.js",
+    "actividad4": "node actividad4/server.js"
+  },
+  "private": true,
+  "dependencies": {
+    "axios": "^1.18.1"
+  }
+}

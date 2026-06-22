@@ -1,0 +1,147 @@
+/* Variables base para colores usados por todas las paginas. */
+:root {
+  --surface: #ffffff;
+  --surface-soft: #f6f8fb;
+  --surface-elevated: rgba(255, 255, 255, 0.86);
+  --text-muted: #5f6c7b;
+  --ring: rgba(20, 184, 166, 0.24);
+  --premium-border: rgba(35, 54, 86, 0.12);
+  --premium-shadow: 0 18px 55px rgba(24, 37, 56, 0.14);
+  --accent-a: #0f766e;
+  --accent-b: #2563eb;
+}
+
+/* Variables alternativas cuando Bootstrap esta en modo oscuro. */
+[data-bs-theme="dark"] {
+  --surface: #141820;
+  --surface-soft: #0b0f14;
+  --surface-elevated: rgba(20, 24, 32, 0.9);
+  --text-muted: #b4bdc9;
+  --ring: rgba(45, 212, 191, 0.26);
+  --premium-border: rgba(226, 232, 240, 0.12);
+  --premium-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+  --accent-a: #2dd4bf;
+  --accent-b: #60a5fa;
+}
+
+/* Fondo general con una textura visual suave y compatible con ambos temas. */
+body {
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    linear-gradient(135deg, rgba(20, 184, 166, 0.12), transparent 30%),
+    linear-gradient(225deg, rgba(37, 99, 235, 0.1), transparent 32%),
+    linear-gradient(180deg, var(--surface-soft), var(--bs-body-bg));
+}
+
+/* La navegacion se ve liviana y elevada, como una barra de aplicacion moderna. */
+.navbar {
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+}
+
+/* Ajusta botones Bootstrap para una estetica mas premium. */
+.btn {
+  border-radius: 8px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+/* Da mas presencia visual a los botones principales. */
+.btn-primary {
+  border: 0;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.22);
+}
+
+/* Mejora el foco de campos de texto sin romper Bootstrap. */
+.form-control:focus {
+  border-color: var(--accent-a);
+  box-shadow: 0 0 0 0.25rem var(--ring);
+}
+
+/* Bloque principal usado para presentar cada actividad. */
+.app-hero {
+  display: grid;
+  align-items: center;
+  min-height: 230px;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 8px;
+  background: var(--surface-elevated);
+  box-shadow: var(--premium-shadow);
+}
+
+/* Tarjetas reutilizables para usuarios, resultados y bloques de contenido. */
+.activity-card,
+.user-card,
+.result-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.25rem;
+  border: 1px solid var(--premium-border);
+  border-radius: 8px;
+  background: var(--surface-elevated);
+  color: var(--bs-body-color);
+  text-decoration: none;
+  box-shadow: var(--premium-shadow);
+  backdrop-filter: blur(14px);
+}
+
+/* Efecto visual para tarjetas enlazables. */
+.activity-card:hover {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem var(--ring);
+  transform: translateY(-2px);
+}
+
+/* Panel destacado para formularios o acciones importantes. */
+.premium-panel {
+  position: sticky;
+  top: 1rem;
+}
+
+/* Circulo numerado usado en tarjetas informativas. */
+.activity-number {
+  display: inline-grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--bs-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Color de texto secundario compatible con modo claro y oscuro. */
+.muted {
+  color: var(--text-muted);
+}
+
+/* Barra flexible para titulos, botones y buscadores. */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Altura minima para evitar saltos bruscos cuando cambia un mensaje. */
+.status-box {
+  min-height: 3rem;
+}
+
+/* Permite que emails largos no rompan el diseno en celulares. */
+.email-link {
+  overflow-wrap: anywhere;
+}
+
+/* Ajuste responsive para reducir la altura del bloque principal en pantallas chicas. */
+@media (max-width: 575.98px) {
+  .app-hero {
+    min-height: 180px;
+  }
+}

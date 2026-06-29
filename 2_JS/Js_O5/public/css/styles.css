@@ -1,0 +1,458 @@
+/* ============================================================
+   styles.css — Estilos del frontend (Js_O5)
+   ============================================================
+   - Variables CSS para modo claro y oscuro ([data-theme])
+   - Layout responsive: formulario + listado
+   - Tabla en desktop, tarjetas en móvil (< 640px)
+   - Botón flotante "volver arriba"
+   ============================================================ */
+
+/* Reset básico: el padding no suma al ancho total del elemento */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Colores compartidos entre ambos temas */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --accent: #8b5cf6;
+  --success: #22c55e;
+  --error: #ef4444;
+  --info: #0ea5e9;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+/* Tema claro: fondos claros, texto oscuro */
+[data-theme="light"] {
+  --bg: #eef2ff;
+  --bg-gradient: linear-gradient(160deg, #eef2ff 0%, #f8fafc 45%, #e0f2fe 100%);
+  --surface: #ffffff;
+  --border: #dbe3f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --code-bg: rgba(59, 130, 246, 0.1);
+  --row-hover: rgba(59, 130, 246, 0.06);
+  --status-info-bg: rgba(14, 165, 233, 0.12);
+  --status-success-bg: rgba(34, 197, 94, 0.12);
+  --status-error-bg: rgba(239, 68, 68, 0.12);
+}
+
+/* Tema oscuro: fondos oscuros, texto claro (por defecto en index.html) */
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --bg-gradient: linear-gradient(160deg, #0b1120 0%, #111827 50%, #0f172a 100%);
+  --surface: #151f32;
+  --border: #2a3650;
+  --text: #e8edf4;
+  --muted: #94a3b8;
+  --info: #38bdf8;
+  --code-bg: rgba(59, 130, 246, 0.15);
+  --row-hover: rgba(59, 130, 246, 0.08);
+  --status-info-bg: rgba(56, 189, 248, 0.12);
+  --status-success-bg: rgba(34, 197, 94, 0.12);
+  --status-error-bg: rgba(239, 68, 68, 0.12);
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Base y contenedor principal --- */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container {
+  width: min(1140px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+/* --- Cabecera --- */
+
+.header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 0;
+}
+
+[data-theme="light"] .header {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+code {
+  background: var(--code-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.main {
+  padding: 1.5rem 0 3rem;
+}
+
+/* --- Tarjetas de estadísticas (alumnos, estado API) --- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.stat-card--blue { border-left: 4px solid var(--primary); }
+.stat-card--green { border-left: 4px solid var(--success); }
+
+.stat-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+/* --- Layout: formulario + listado --- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* A partir de 768px: formulario fijo a la izquierda */
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 340px 1fr;
+  }
+}
+
+/* --- Paneles (formulario y listado) --- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem;
+  box-shadow: var(--shadow);
+}
+
+.panel-form {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Franja de color en la parte superior del panel del formulario */
+.panel-form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.panel-desc {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* --- Campos del formulario --- */
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Clase que agrega script.js cuando hay error de validación */
+.field input.is-invalid {
+  border-color: var(--error);
+}
+
+.field-error {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: var(--error);
+}
+
+/* --- Botones --- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.35);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+/* --- Mensajes de estado (info / success / error) --- */
+
+.status {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.status-info { background: var(--status-info-bg); color: var(--info); }
+.status-success { background: var(--status-success-bg); color: var(--success); }
+.status-error { background: var(--status-error-bg); color: var(--error); }
+
+/* --- Tabla de alumnos (desktop) --- */
+
+.table-wrap {
+  overflow-x: auto;
+  display: none; /* oculta en móvil; se muestra desde 640px */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.students-table th,
+.students-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.students-table th {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.students-table tbody tr:hover {
+  background: var(--row-hover);
+}
+
+.students-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Tarjetas de alumnos (móvil) --- */
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.student-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.student-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.student-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.student-meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Responsive: tabla en pantallas anchas, tarjetas en móvil */
+@media (min-width: 640px) {
+  .table-wrap { display: block; }
+  .cards { display: none; }
+}
+
+/* --- Botón flotante "volver arriba" (controlado por theme.js) --- */
+
+#scrollToTop {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  display: none;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+#scrollToTop.show { display: flex; }
+#scrollToTop:hover { transform: translateY(-3px); }

@@ -1,0 +1,125 @@
+<!doctype html>
+<!--
+  ============================================================
+  index.html — Página principal del frontend (Js_O5)
+  ============================================================
+  Estructura:
+    - Cabecera con título y botones (tema, recargar)
+    - Tarjetas de estadísticas (cantidad de alumnos, estado API)
+    - Formulario para agregar alumnos (POST)
+    - Tabla (desktop) / tarjetas (móvil) con el listado
+  La lógica está en js/script.js y el tema en js/theme.js
+-->
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alumnos — API REST</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+
+    <!-- Cabecera: título del proyecto y acciones globales -->
+    <header class="header">
+      <div class="container header-inner">
+        <div>
+          <p class="eyebrow">Js_O5</p>
+          <h1>Gestión de Alumnos</h1>
+          <p class="subtitle">API REST con Node.js, Express y MySQL (<code>alumnosDB</code>)</p>
+        </div>
+        <div class="header-actions">
+          <!-- theme.js cambia data-theme entre "dark" y "light" -->
+          <button class="btn btn-secondary" id="themeToggle" type="button" aria-label="Cambiar a modo claro">Sol</button>
+          <!-- Vuelve a pedir la lista al servidor -->
+          <button class="btn btn-secondary" id="reloadBtn" type="button">Recargar datos</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main">
+
+      <!-- Resumen rápido: total de alumnos y si la API responde -->
+      <section class="stats">
+        <article class="stat-card stat-card--blue">
+          <span class="stat-icon">👥</span>
+          <div>
+            <span class="stat-label">Alumnos registrados</span>
+            <span class="stat-value" id="studentsCount">0</span>
+          </div>
+        </article>
+        <article class="stat-card stat-card--green">
+          <span class="stat-icon">⚡</span>
+          <div>
+            <span class="stat-label">Estado API</span>
+            <span class="stat-value" id="apiState">—</span>
+          </div>
+        </article>
+      </section>
+
+      <div class="layout">
+
+        <!-- Panel izquierdo: formulario de alta (solo POST) -->
+        <section class="panel panel-form">
+          <span class="badge">POST</span>
+          <h2>Agregar alumno</h2>
+          <p class="panel-desc">Completá el formulario para registrar un alumno nuevo.</p>
+
+          <!-- novalidate: la validación la hace script.js, no el navegador -->
+          <form id="studentForm" novalidate>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Ej: Laura">
+              <p class="field-error" id="nombreError" hidden></p>
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" name="apellido" type="text" placeholder="Ej: Gómez">
+              <p class="field-error" id="apellidoError" hidden></p>
+            </div>
+            <div class="field">
+              <label for="edad">Edad</label>
+              <input id="edad" name="edad" type="number" placeholder="Ej: 20">
+              <p class="field-error" id="edadError" hidden></p>
+            </div>
+            <button class="btn btn-primary" type="submit">Guardar alumno</button>
+          </form>
+        </section>
+
+        <!-- Panel derecho: mensajes de estado y listado de alumnos -->
+        <section class="panel panel-wide">
+          <div class="status status-info" id="status">Cargando alumnos...</div>
+
+          <!-- Tabla visible solo en pantallas ≥ 640px (ver styles.css) -->
+          <div class="table-wrap">
+            <table class="students-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Edad</th>
+                </tr>
+              </thead>
+              <!-- script.js inserta las filas dinámicamente -->
+              <tbody id="studentsBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Tarjetas visibles solo en móvil -->
+          <div class="cards" id="studentsCards"></div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Botón flotante: aparece al hacer scroll (controlado por theme.js) -->
+    <button id="scrollToTop" type="button" title="Volver arriba" aria-label="Volver arriba">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+      </svg>
+    </button>
+
+    <!-- theme.js primero (tema y scroll); script.js después (API y formulario) -->
+    <script src="js/theme.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

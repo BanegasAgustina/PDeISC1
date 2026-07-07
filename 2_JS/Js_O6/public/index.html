@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego del Ahorcado</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='48' font-size='48'%3E%E2%9C%8F%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="brand__mark">A</span>
+        <div>
+          <h1>Juego del Ahorcado</h1>
+          <p>Palabras en espanol latinoamericano, ranking y PDF avanzado</p>
+        </div>
+      </div>
+      <button id="btn-tema" class="icon-btn" type="button" aria-label="Cambiar tema">
+        <span id="icono-tema" class="emoji" aria-hidden="true">🌙</span>
+      </button>
+    </header>
+
+    <main class="layout">
+      <section class="game-panel">
+        <section id="pantalla-inicio" class="surface start-panel">
+          <div>
+            <p class="eyebrow">Nueva partida</p>
+            <h2>Elegi categoria y dificultad</h2>
+            <p class="muted">La API local devuelve una palabra acorde antes de iniciar el cronometro.</p>
+          </div>
+
+          <div class="setup-grid">
+            <label class="field">
+              <span>Categoria</span>
+              <select id="select-categoria">
+                <option value="tecnologia">Tecnologia</option>
+                <option value="animales">Animales</option>
+                <option value="deportes">Deportes</option>
+                <option value="comida">Comida</option>
+                <option value="paises">Paises</option>
+                <option value="profesiones">Profesiones</option>
+                <option value="objetos">Objetos</option>
+                <option value="naturaleza">Naturaleza</option>
+                <option value="musica">Musica</option>
+                <option value="peliculas">Peliculas</option>
+                <option value="programacion">Programacion</option>
+                <option value="general" selected>General</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Dificultad</span>
+              <select id="select-dificultad">
+                <option value="facil">Facil</option>
+                <option value="media" selected>Media</option>
+                <option value="dificil">Dificil</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="difficulty-info" id="info-dificultad"></div>
+
+          <button id="btn-nueva-partida" class="btn btn--primary btn--full" type="button">
+            <span class="emoji" aria-hidden="true">▶️</span>
+            Iniciar partida
+          </button>
+        </section>
+
+        <section id="area-juego" class="hidden">
+          <div class="stats-bar">
+            <div class="stat">
+              <span>⏱️ Tiempo</span>
+              <strong id="cronometro">00:00</strong>
+            </div>
+            <div class="stat">
+              <span>Puntaje</span>
+              <strong id="puntaje-actual">0</strong>
+            </div>
+            <div class="stat">
+              <span>Intentos</span>
+              <strong id="intentos-restantes">6</strong>
+            </div>
+            <div class="stat">
+              <span>💡 Pistas</span>
+              <strong id="pistas-restantes">0</strong>
+            </div>
+          </div>
+
+          <div class="surface game-board">
+            <div class="game-meta">
+              <span id="categoria-activa">General</span>
+              <span id="dificultad-activa">Media</span>
+            </div>
+
+            <div class="game-grid">
+              <div class="hangman-wrap">
+                <svg id="hangman" class="hangman-svg" viewBox="0 0 200 250" aria-hidden="true">
+                  <defs>
+                    <filter id="sketchNoise">
+                      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="7" result="noise" />
+                      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.7" />
+                    </filter>
+                  </defs>
+                  <path id="base" d="M20 230 C60 224 120 235 182 228 M35 232 C74 238 126 226 170 234" />
+                  <path id="poste" d="M51 230 C45 184 53 133 48 82 C47 52 50 30 51 19 M58 228 C55 163 57 84 56 23" />
+                  <path id="viga" d="M49 22 C80 15 115 24 151 19 M54 30 C80 26 121 29 147 27" />
+                  <path id="soporte" class="sketch-soft" d="M54 68 C73 45 84 32 103 22 M62 74 C79 53 89 39 111 24" />
+                  <path id="soga" d="M150 21 C148 31 153 39 150 50 M154 22 C151 33 156 41 153 50" />
+                  <g id="cabeza" class="body-part">
+                    <path d="M130 70 C128 55 139 47 153 50 C169 54 174 68 168 81 C162 94 141 95 133 84 C130 80 129 75 130 70" />
+                    <path class="sketch-soft" d="M139 69 C141 66 144 66 146 69 M157 69 C159 66 162 66 164 69 M142 80 C149 86 158 86 164 79" />
+                  </g>
+                  <g id="tronco" class="body-part">
+                    <path d="M151 91 C146 112 153 129 149 151 M157 92 C155 113 160 131 154 151" />
+                  </g>
+                  <g id="brazoi" class="body-part">
+                    <path d="M150 108 C138 113 129 122 119 131 M153 112 C140 118 131 126 123 134" />
+                  </g>
+                  <g id="brazod" class="body-part">
+                    <path d="M154 109 C166 114 173 123 183 130 M151 113 C163 120 172 127 180 135" />
+                  </g>
+                  <g id="piernai" class="body-part">
+                    <path d="M151 150 C139 164 131 179 121 193 M156 151 C144 166 136 181 126 196" />
+                  </g>
+                  <g id="piernad" class="body-part">
+                    <path d="M154 150 C166 164 174 180 184 193 M149 152 C162 168 169 181 179 197" />
+                  </g>
+                  <path class="sketch-soft" d="M32 232 C26 236 24 240 19 242 M44 231 C41 238 39 241 36 244 M58 231 C56 239 54 242 50 246" />
+                </svg>
+              </div>
+
+              <div class="word-card">
+                <div id="palabra-oculta" class="word-display"></div>
+                <div class="wrong-letters">
+                  <span>Letras incorrectas</span>
+                  <strong id="letras-incorrectas">-</strong>
+                </div>
+                <button id="btn-pista" class="btn btn--secondary" type="button">
+                  <span class="emoji" aria-hidden="true">💡</span>
+                  Usar pista
+                </button>
+              </div>
+            </div>
+
+            <div id="teclado" class="keyboard"></div>
+            <p id="mensaje-carga" class="loading-msg hidden">Cargando palabra...</p>
+          </div>
+        </section>
+
+        <section id="panel-fin" class="surface result-panel hidden">
+          <div id="resultado-icono" class="result-icon">OK</div>
+          <h2 id="resultado-titulo">Ganaste</h2>
+          <p id="resultado-mensaje" class="muted"></p>
+
+          <div class="result-stats">
+            <div>
+              <span>Puntaje final</span>
+              <strong id="puntaje-final">0</strong>
+            </div>
+            <div>
+              <span>Tiempo</span>
+              <strong id="tiempo-final">00:00</strong>
+            </div>
+          </div>
+
+          <label class="field player-field">
+            <span>Nombre del jugador</span>
+            <input type="text" id="input-nombre" placeholder="Tu nombre..." maxlength="100">
+          </label>
+
+          <div class="actions">
+            <button id="btn-guardar" class="btn btn--primary" type="button">
+              <span class="emoji" aria-hidden="true">💾</span>
+              Guardar
+            </button>
+            <button id="btn-pdf" class="btn btn--secondary" type="button">
+              <span class="emoji" aria-hidden="true">📄</span>
+              PDF jugador
+            </button>
+            <button id="btn-reiniciar" class="btn btn--ghost" type="button">
+              <span class="emoji" aria-hidden="true">🔁</span>
+              Jugar de nuevo
+            </button>
+          </div>
+          <p id="mensaje-guardado" class="feedback-msg hidden"></p>
+        </section>
+      </section>
+
+      <aside class="surface leaderboard-panel">
+        <div class="leaderboard-header">
+          <div>
+            <p class="eyebrow">Ranking</p>
+            <h2>Tabla de posiciones</h2>
+          </div>
+          <button id="btn-pdf-ranking" class="icon-btn" type="button" aria-label="Exportar ranking">
+            <span class="emoji" aria-hidden="true">📄</span>
+          </button>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span class="emoji" aria-hidden="true">🔎</span>
+            <input id="buscador-ranking" type="search" placeholder="Buscar jugador">
+          </label>
+          <label class="field compact-field">
+            <span>Ordenar</span>
+            <select id="orden-ranking">
+              <option value="puntos_desc">Puntaje (Mayor a Menor)</option>
+              <option value="puntos_asc">Puntaje (Menor a Mayor)</option>
+              <option value="nombre_asc">Nombre (A a Z)</option>
+              <option value="nombre_desc">Nombre (Z a A)</option>
+              <option value="tiempo_asc">Tiempo (Menor a Mayor)</option>
+              <option value="tiempo_desc">Tiempo (Mayor a Menor)</option>
+              <option value="fecha_desc">Fecha (Mas reciente)</option>
+              <option value="fecha_asc">Fecha (Mas antigua)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="leaderboard" id="tabla-posiciones">
+            <thead>
+              <tr>
+                <th>Pos.</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Dificultad</th>
+                <th>Puntos</th>
+                <th>Tiempo</th>
+                <th>Fecha</th>
+                <th>PDF</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-body">
+              <tr><td colspan="8" class="empty-row">Cargando posiciones...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <button id="pagina-prev" class="icon-btn" type="button" aria-label="Pagina anterior">
+            <span class="emoji" aria-hidden="true">←</span>
+          </button>
+          <span id="pagina-info">Pagina 1 de 1</span>
+          <button id="pagina-next" class="icon-btn" type="button" aria-label="Pagina siguiente">
+            <span class="emoji" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="modal-pdf" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-pdf-title">
+    <div class="modal__panel">
+      <div class="modal__header">
+        <div>
+          <p class="eyebrow">Exportacion</p>
+          <h2 id="modal-pdf-title">Configurar PDF</h2>
+        </div>
+        <button id="btn-cerrar-modal" class="icon-btn" type="button" aria-label="Cerrar modal">
+          <span class="emoji" aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <div class="modal-grid">
+        <fieldset class="options-box">
+          <legend>Contenido</legend>
+          <label><input type="checkbox" data-pdf-field="logo" checked> Logo del juego</label>
+          <label><input type="checkbox" data-pdf-field="nombre" checked> Nombre</label>
+          <label><input type="checkbox" data-pdf-field="categoria" checked> Categoria</label>
+          <label><input type="checkbox" data-pdf-field="dificultad" checked> Dificultad</label>
+          <label><input type="checkbox" data-pdf-field="puntos" checked> Puntaje</label>
+          <label><input type="checkbox" data-pdf-field="tiempo" checked> Tiempo</label>
+          <label><input type="checkbox" data-pdf-field="fecha" checked> Fecha</label>
+          <label><input type="checkbox" data-pdf-field="resultado" checked> Resultado</label>
+          <label><input type="checkbox" data-pdf-field="posicion" checked> Posicion en ranking</label>
+          <label><input type="checkbox" data-pdf-field="fechaPdf" checked> Fecha de creacion</label>
+          <label><input type="checkbox" data-pdf-field="horaPdf" checked> Hora de creacion</label>
+          <label><input type="checkbox" data-pdf-field="tema" checked> Tema utilizado</label>
+          <label><input type="checkbox" data-pdf-field="firma" checked> Firma del sistema</label>
+        </fieldset>
+
+        <div class="options-box">
+          <label class="field">
+            <span>Formato</span>
+            <select id="pdf-formato">
+              <option value="a4">A4</option>
+              <option value="letter">Carta</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Orientacion</span>
+            <select id="pdf-orientacion">
+              <option value="portrait">Vertical</option>
+              <option value="landscape">Horizontal</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Tema del PDF</span>
+            <select id="pdf-tema">
+              <option value="light">Claro</option>
+              <option value="dark">Oscuro</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Exportar</span>
+            <select id="pdf-alcance">
+              <option value="ranking">Ranking completo</option>
+              <option value="jugador">Solo jugador seleccionado</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal__actions">
+        <button id="btn-cancelar-pdf" class="btn btn--ghost" type="button">Cancelar</button>
+        <button id="btn-generar-pdf" class="btn btn--primary" type="button">
+          <span class="emoji" aria-hidden="true">📄</span>
+          Generar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Módulos del juego: orden de carga importa (dependencias primero) -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/cronometro.js"></script>
+  <script src="js/puntaje.js"></script>
+  <script src="js/ahorcado.js"></script>
+  <script src="js/palabra.js"></script>
+  <script src="js/teclado.js"></script>
+  <script src="js/estadoJuego.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/ranking.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/tema.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

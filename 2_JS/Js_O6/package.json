@@ -1,0 +1,24 @@
+{
+  "name": "juego-del-ahorcado",
+  "version": "1.0.0",
+  "description": "Juego del Ahorcado con HTML, CSS, JavaScript, Node.js, Express y MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "ahorcado",
+    "hangman",
+    "nodejs",
+    "express",
+    "mysql"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jspdf": "^4.2.1",
+    "mysql2": "^3.14.0"
+  }
+}

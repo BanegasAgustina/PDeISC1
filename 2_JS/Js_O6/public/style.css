@@ -1,0 +1,1114 @@
+﻿:root,
+[data-theme="light"] {
+  --paper: #fbfaf3;
+  --paper-soft: rgba(255, 254, 248, 0.82);
+  --paper-strong: rgba(255, 254, 248, 0.96);
+  --ink: #30343a;
+  --muted: #666b73;
+  --pencil: #3b3f45;
+  --line: rgba(83, 148, 206, 0.22);
+  --margin-line: rgba(214, 73, 73, 0.34);
+  --accent: #2f6fba;
+  --accent-soft: rgba(47, 111, 186, 0.13);
+  --success: #527b50;
+  --success-soft: rgba(82, 123, 80, 0.18);
+  --danger: #a64b44;
+  --danger-soft: rgba(166, 75, 68, 0.17);
+  --warning: #b78635;
+  --shadow: 0 18px 36px rgba(64, 55, 38, 0.16);
+  --soft-shadow: 0 8px 18px rgba(64, 55, 38, 0.1);
+  --radius: 8px;
+}
+
+[data-theme="dark"] {
+  --paper: #1c1d20;
+  --paper-soft: rgba(34, 35, 38, 0.82);
+  --paper-strong: rgba(39, 40, 43, 0.96);
+  --ink: #f1efe5;
+  --muted: #c2bfb3;
+  --pencil: #f3f0e7;
+  --line: rgba(141, 183, 224, 0.17);
+  --margin-line: rgba(231, 109, 109, 0.2);
+  --accent: #8db7e0;
+  --accent-soft: rgba(141, 183, 224, 0.14);
+  --success: #9bc38f;
+  --success-soft: rgba(155, 195, 143, 0.14);
+  --danger: #e59a91;
+  --danger-soft: rgba(229, 154, 145, 0.16);
+  --warning: #e3c176;
+  --shadow: 0 20px 42px rgba(0, 0, 0, 0.34);
+  --soft-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.55), transparent 12rem),
+    radial-gradient(circle at 78% 86%, rgba(120, 96, 62, 0.08), transparent 18rem),
+    var(--paper);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    linear-gradient(90deg, transparent 0 74px, var(--margin-line) 75px 76px, transparent 77px),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px),
+    radial-gradient(circle at 24px 52px, rgba(0, 0, 0, 0.12) 0 10px, transparent 11px),
+    radial-gradient(circle at 24px 124px, rgba(0, 0, 0, 0.12) 0 10px, transparent 11px),
+    radial-gradient(circle at 24px 196px, rgba(0, 0, 0, 0.12) 0 10px, transparent 11px);
+  background-size: auto, 24px 24px, 24px 24px, 100% 360px, 100% 360px, 100% 360px;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(60, 60, 60, 0.08), transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(60, 60, 60, 0.06), transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(60, 60, 60, 0.07), transparent 1px);
+  background-size: 7px 9px, 11px 13px, 13px 15px;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] body::after {
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.bg-grid {
+  display: none;
+}
+
+.app {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 26px 24px 42px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.brand {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+}
+
+.brand__mark {
+  display: none;
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: clamp(2.45rem, 5vw, 4.9rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.9;
+  text-shadow: 0.7px 0.9px 0 rgba(0, 0, 0, 0.12);
+}
+
+.brand p,
+.muted {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.brand p {
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: clamp(1rem, 2vw, 1.38rem);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(380px, 0.72fr) minmax(560px, 1.28fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.game-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.surface {
+  position: relative;
+  border: 2px solid var(--pencil);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+  box-shadow: var(--shadow);
+}
+
+.surface::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: 0;
+  pointer-events: none;
+  border: 2px solid var(--pencil);
+  border-radius: 10px 8px 9px 7px;
+  opacity: 0.42;
+  transform: rotate(-0.28deg);
+}
+
+.surface::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: -1;
+  border-radius: var(--radius);
+  transform: rotate(-0.35deg);
+  background: rgba(0, 0, 0, 0.04);
+  filter: blur(7px);
+}
+
+.surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.start-panel,
+.result-panel,
+.leaderboard-panel,
+.game-board {
+  padding: 22px;
+}
+
+.start-panel {
+  display: grid;
+  gap: 18px;
+  transform: rotate(-0.2deg);
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--accent);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.leaderboard-header h2,
+.start-panel h2,
+.result-panel h2,
+.modal h2 {
+  margin: 0;
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field span,
+.options-box legend {
+  color: var(--pencil);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.96rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.field input,
+.field select,
+.search-box input,
+.search-box {
+  width: 100%;
+  min-width: 0;
+  border: 2px solid var(--pencil);
+  border-radius: 7px 9px 6px 8px;
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--ink);
+  outline: none;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .field input,
+[data-theme="dark"] .field select,
+[data-theme="dark"] .search-box input,
+[data-theme="dark"] .search-box {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.field input,
+.field select {
+  min-height: 48px;
+  padding: 0 13px;
+}
+
+.field input:focus,
+.field select:focus,
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.difficulty-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  border: 1.5px dashed var(--pencil);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.13);
+  color: var(--ink);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1.02rem;
+}
+
+.difficulty-info strong,
+.pill {
+  padding: 3px 9px;
+  border: 1.5px solid var(--success);
+  border-radius: 999px;
+  background: var(--success-soft);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.btn,
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--pencil);
+  color: var(--ink);
+  transition: transform 0.12s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.btn {
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 7px 9px 6px 8px;
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1.17rem;
+  font-weight: 700;
+}
+
+.btn .emoji,
+.icon-btn .emoji {
+  line-height: 1;
+}
+
+.btn--primary {
+  border-color: #2f6fba;
+  background:
+    repeating-linear-gradient(-12deg, rgba(255, 255, 255, 0.12) 0 3px, transparent 3px 7px),
+    var(--accent);
+  color: #fffefa;
+  box-shadow: var(--soft-shadow);
+}
+
+.btn--secondary,
+.btn--ghost,
+.icon-btn {
+  background: var(--paper-soft);
+}
+
+.btn--ghost {
+  color: var(--muted);
+  background: transparent;
+}
+
+.btn:not(:disabled):hover,
+.icon-btn:not(:disabled):hover {
+  transform: translateY(-1px) rotate(-0.3deg);
+  box-shadow: var(--soft-shadow);
+}
+
+.btn:not(:disabled):active,
+.icon-btn:not(:disabled):active,
+.key:not(:disabled):active {
+  transform: translateY(2px) scale(0.98);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stat {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1.5px solid var(--pencil);
+  border-radius: 8px;
+  background: var(--paper-soft);
+  box-shadow: var(--soft-shadow);
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.stat strong {
+  display: block;
+  color: var(--accent);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.game-board {
+  display: grid;
+  gap: 18px;
+  transform: rotate(0.15deg);
+}
+
+.game-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.game-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1.5px solid var(--pencil);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+}
+
+.hangman-wrap {
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  border-radius: 8px;
+}
+
+.hangman-svg {
+  width: min(260px, 100%);
+  height: auto;
+  overflow: visible;
+}
+
+.hangman-svg path,
+.hangman-svg circle,
+.hangman-svg line {
+  stroke: var(--pencil);
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#sketchNoise);
+}
+
+.hangman-svg .sketch-soft {
+  stroke-width: 2.4;
+  opacity: 0.82;
+}
+
+.hangman-svg .body-part {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.hangman-svg .body-part.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: pencilDraw 0.34s ease both;
+}
+
+@keyframes pencilDraw {
+  from {
+    stroke-dasharray: 1 18;
+    opacity: 0;
+  }
+  to {
+    stroke-dasharray: 26 0;
+    opacity: 1;
+  }
+}
+
+.word-card {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  min-width: 0;
+}
+
+.word-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(5px, 1vw, 10px);
+  max-width: 100%;
+  min-height: 62px;
+  align-items: end;
+}
+
+.letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(27px, 4.8vw, 42px);
+  height: 52px;
+  border-bottom: 4px solid var(--pencil);
+  color: var(--pencil);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: clamp(1.55rem, 4vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.letter--revealed {
+  animation: writeLetter 0.22s ease;
+}
+
+@keyframes writeLetter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(-4deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+.wrong-letters {
+  display: grid;
+  gap: 3px;
+  text-align: center;
+}
+
+.wrong-letters span {
+  color: var(--muted);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.96rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.wrong-letters strong {
+  color: var(--danger);
+  letter-spacing: 0.04em;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+  gap: 9px;
+}
+
+.key {
+  min-width: 0;
+  height: 44px;
+  border: 1.7px solid var(--pencil);
+  border-radius: 7px 9px 6px 8px;
+  background: var(--paper-strong);
+  color: var(--ink);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1.35rem;
+  font-weight: 400;
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.key:nth-child(3n) {
+  transform: rotate(0.7deg);
+}
+
+.key:nth-child(4n) {
+  transform: rotate(-0.6deg);
+}
+
+.key:not(:disabled):hover {
+  background: var(--accent-soft);
+}
+
+.key--correct {
+  background: var(--success-soft) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+}
+
+.key--wrong {
+  background: var(--danger-soft) !important;
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+  text-decoration: line-through;
+}
+
+.key--used {
+  animation: usedShake 0.18s ease;
+}
+
+@keyframes usedShake {
+  0%, 100% { transform: translateX(0); }
+  35% { transform: translateX(-2px) rotate(-1deg); }
+  70% { transform: translateX(2px) rotate(1deg); }
+}
+
+.loading-msg,
+.feedback-msg {
+  margin: 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.result-panel {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.result-panel.result-panel--win::before,
+.result-panel.result-panel--loss::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle, var(--warning) 0 3px, transparent 4px),
+    radial-gradient(circle, var(--accent) 0 2px, transparent 3px),
+    radial-gradient(circle, var(--success) 0 2px, transparent 3px);
+  background-position: 12% 16%, 68% 18%, 82% 62%;
+  background-size: 90px 90px, 110px 110px, 130px 130px;
+  animation: confettiDrift 1.4s ease both;
+}
+
+.result-panel.result-panel--loss::before {
+  background-image:
+    radial-gradient(circle, var(--danger) 0 2px, transparent 3px),
+    linear-gradient(120deg, transparent 0 48%, var(--danger) 49% 51%, transparent 52%);
+  opacity: 0.18;
+}
+
+@keyframes confettiDrift {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+}
+
+.result-icon {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 2px solid var(--pencil);
+  border-radius: 50%;
+  background: var(--paper-strong);
+  color: var(--ink);
+  font-size: 2rem;
+  box-shadow: var(--soft-shadow);
+}
+
+.result-stats {
+  display: grid;
+  width: min(380px, 100%);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.result-stats div {
+  padding: 12px;
+  border: 1.5px dashed var(--pencil);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.result-stats span {
+  display: block;
+  color: var(--muted);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.result-stats strong {
+  color: var(--accent);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1.65rem;
+  font-weight: 400;
+}
+
+.player-field {
+  width: min(380px, 100%);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.feedback-msg--ok {
+  color: var(--success);
+}
+
+.feedback-msg--error {
+  color: var(--danger);
+}
+
+.leaderboard-panel {
+  min-width: 0;
+  transform: rotate(0.12deg);
+}
+
+.leaderboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(210px, 0.9fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 12px;
+}
+
+.search-box .emoji {
+  color: var(--muted);
+}
+
+.search-box input {
+  min-height: 38px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.compact-field {
+  grid-template-columns: 1fr;
+}
+
+.table-wrapper {
+  max-height: 590px;
+  overflow: auto;
+  border: 1.7px solid var(--pencil);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.leaderboard {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.93rem;
+}
+
+.leaderboard thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--paper-strong);
+}
+
+.leaderboard th,
+.leaderboard td {
+  padding: 12px 11px;
+  border-bottom: 1px solid rgba(90, 95, 100, 0.28);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.leaderboard th {
+  color: var(--pencil);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.leaderboard tbody tr {
+  animation: rowIn 0.22s ease both;
+}
+
+.leaderboard tbody tr:hover {
+  background: var(--accent-soft);
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rank {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1.5px solid var(--pencil);
+  border-radius: 50%;
+  background: var(--paper-strong);
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.rank--1,
+.rank--2,
+.rank--3 {
+  border-color: transparent;
+  background: transparent;
+  font-size: 1.55rem;
+}
+
+.empty-row {
+  padding: 26px !important;
+  color: var(--muted);
+  text-align: center !important;
+}
+
+.row-pdf {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand ITC", cursive;
+  font-size: 1rem;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(12, 12, 12, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.modal__panel {
+  width: min(820px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+  border: 2px solid var(--pencil);
+  border-radius: 8px;
+  background: var(--paper-strong);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.modal__header,
+.modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(220px, 0.8fr);
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.options-box {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1.5px dashed var(--pencil);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.options-box label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.options-box input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+}
+
+.modal__actions {
+  justify-content: flex-end;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 1120px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .leaderboard {
+    min-width: 720px;
+  }
+}
+
+@media (max-width: 700px) {
+  .app {
+    padding: 16px 12px 28px;
+  }
+
+  body::before {
+    background:
+      linear-gradient(90deg, transparent 0 36px, var(--margin-line) 37px 38px, transparent 39px),
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: auto, 22px 22px, 22px 22px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .brand {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .brand p {
+    display: none;
+  }
+
+  .setup-grid,
+  .toolbar,
+  .game-grid,
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .start-panel,
+  .result-panel,
+  .leaderboard-panel,
+  .game-board,
+  .modal__panel {
+    padding: 16px;
+  }
+
+  .hangman-wrap {
+    min-height: 235px;
+  }
+
+  .keyboard {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .key {
+    height: 40px;
+    font-size: 1.12rem;
+  }
+
+  .leaderboard {
+    min-width: 0;
+  }
+
+  .leaderboard thead {
+    display: none;
+  }
+
+  .leaderboard,
+  .leaderboard tbody,
+  .leaderboard tr,
+  .leaderboard td {
+    display: block;
+    width: 100%;
+  }
+
+  .leaderboard tr {
+    padding: 12px;
+    border-bottom: 1px solid rgba(90, 95, 100, 0.28);
+  }
+
+  .leaderboard td {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 8px 0;
+    border: 0;
+    white-space: normal;
+    text-align: right;
+  }
+
+  .leaderboard td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-weight: 800;
+    text-align: left;
+  }
+
+  .leaderboard td:nth-child(1)::before { content: "Pos."; }
+  .leaderboard td:nth-child(2)::before { content: "Nombre"; }
+  .leaderboard td:nth-child(3)::before { content: "Categoria"; }
+  .leaderboard td:nth-child(4)::before { content: "Dificultad"; }
+  .leaderboard td:nth-child(5)::before { content: "Puntos"; }
+  .leaderboard td:nth-child(6)::before { content: "Tiempo"; }
+  .leaderboard td:nth-child(7)::before { content: "Fecha"; }
+  .leaderboard td:nth-child(8)::before { content: "PDF"; }
+
+  .pagination {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .header {
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stats-bar,
+  .result-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .actions,
+  .modal__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .actions .btn,
+  .modal__actions .btn {
+    width: 100%;
+  }
+}
+

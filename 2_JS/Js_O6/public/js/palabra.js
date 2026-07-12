@@ -1,32 +1,39 @@
 // ============================================================
 // palabra.js - Renderizado de la palabra en pantalla
 // ============================================================
-// Dibuja los guiones y letras reveladas sin tocar otra lógica.
+// Dibuja los guiones y letras reveladas en el contenedor #palabra-oculta.
+// No toca el estado del juego ni hace ningún fetch.
 
-// Renderiza la palabra en el contenedor #palabra-oculta.
-// letrasAdivinadas: Set o array de letras normalizadas ya adivinadas.
-// La función recibe la palabra como array de caracteres.
+// Renderiza la palabra letra por letra en el contenedor #palabra-oculta.
+// Parámetros:
+//   letrasArr        → Array de caracteres de la palabra (ej: ['p','e','r','r','o'])
+//   letrasAdivinadas → Set con las letras normalizadas ya adivinadas (ej: Set{'p','e'})
 function dibujarPalabra(letrasArr, letrasAdivinadas) {
   const divPalabra = document.getElementById('palabra-oculta');
-  if (!divPalabra) return;
+  if (!divPalabra) return; // Si el contenedor no existe, no hace nada
 
-  divPalabra.innerHTML = '';
+  divPalabra.innerHTML = ''; // Borra el contenido anterior para redibujar desde cero
 
   letrasArr.forEach((letra) => {
-    const span = document.createElement('span');
-    span.className = 'letter';
+    const span = document.createElement('span'); // Crea un <span> por cada carácter
+    span.className = 'letter';                   // Clase CSS que da el estilo de guión
 
-    // Los caracteres no-letra (espacios, guiones) se muestran siempre
     if (!/[a-zA-Z\u00c0-\u017f\u00f1\u00d1]/.test(letra)) {
+      // ── Carácter no alfabético (espacio, guión, etc.) ──
+      // Se muestra siempre visible, ya que no es una letra a adivinar.
       span.textContent = letra;
-      span.classList.add('letter--revealed');
+      span.classList.add('letter--revealed'); // Clase que anima la aparición
+
     } else if (letrasAdivinadas.has(normalizarTexto(letra))) {
-      // La letra ya fue adivinada: mostrarla en mayúscula con animación
+      // ── Letra que ya fue adivinada ──
+      // Se muestra en MAYÚSCULA con la animación de "escribir".
+      // normalizarTexto compara sin importar tildes (ej: 'é' == 'e').
       span.textContent = letra.toUpperCase();
       span.classList.add('letter--revealed');
-    }
-    // Si no: el span queda vacío (guión visual provisto por CSS)
 
-    divPalabra.appendChild(span);
+    }
+    // Si no cae en ningún caso: el span queda vacío y el CSS muestra el guión visual (::after).
+
+    divPalabra.appendChild(span); // Agrega el span al contenedor
   });
 }

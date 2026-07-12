@@ -1,29 +1,39 @@
 // ============================================================
 // ahorcado.js - Dibujo SVG del muñeco ahorcado
 // ============================================================
-// Gestiona exclusivamente la visualización de las partes del cuerpo.
-// La horca (base, poste, viga, soga) siempre está visible en el SVG.
-// Cada error agrega UNA sola parte del cuerpo, en el orden:
-//   1. cabeza   2. tronco   3. brazoi   4. brazod   5. piernai   6. piernad
+// Solo maneja la VISUALIZACIÓN del SVG. No toca el estado del juego.
+// La horca (base, poste, viga, soga) siempre está visible en el SVG;
+// este módulo solo controla las partes del CUERPO.
 //
-// Con 6 intentos máximos y 6 partes, el muñeco se completa exactamente
-// cuando el jugador pierde (intentos restantes = 0).
+// Orden de aparición con 6 errores y 6 partes:
+//   Error 1 → cabeza
+//   Error 2 → tronco
+//   Error 3 → brazoi  (brazo izquierdo)
+//   Error 4 → brazod  (brazo derecho)
+//   Error 5 → piernai (pierna izquierda)
+//   Error 6 → piernad (pierna derecha) → muñeco completo = derrota
 
-// Actualiza la visibilidad de las partes según la cantidad de errores.
-// errores: número entero (letras incorrectas acumuladas).
+// Muestra las partes del cuerpo según cuántos errores acumula el jugador.
+// Cada parte tiene un id en el SVG (cabeza, tronco, brazoi, etc.).
+// La clase CSS "visible" activa la animación de aparición definida en style.css.
 function actualizarMuneco(errores) {
+  // Asegura que errores sea un número entero no negativo
   const n = Math.max(0, Number(errores) || 0);
+
   PARTES_AHORCADO.forEach((id, index) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    // La parte se hace visible cuando su posición (0-based) < cantidad de errores
+    const el = document.getElementById(id); // Busca el elemento SVG por su id
+    if (!el) return;                         // Si el elemento no existe en el DOM, lo ignora
+
+    // La parte se hace visible cuando su posición (0-based) es menor que la cantidad de errores.
+    // Ejemplo: con 2 errores → index 0 (cabeza) y index 1 (tronco) son < 2 → visibles.
     el.classList.toggle('visible', index < n);
   });
 }
 
-// Oculta todas las partes del cuerpo — estado inicial o nueva partida.
+// Oculta todas las partes del cuerpo — estado inicial o al comenzar una nueva partida.
+// Remueve la clase "visible" de cada elemento para que el muñeco quede limpio.
 function resetearMuneco() {
   PARTES_AHORCADO.forEach((id) => {
-    document.getElementById(id)?.classList.remove('visible');
+    document.getElementById(id)?.classList.remove('visible'); // ?. evita error si el elemento no existe
   });
 }

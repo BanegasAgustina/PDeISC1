@@ -1,0 +1,4 @@
+/* Reinicio mínimo para que el diseño ocupe todo el navegador. */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, system-ui, sans-serif; }
+button { font: inherit; }

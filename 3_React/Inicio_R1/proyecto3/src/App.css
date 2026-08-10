@@ -1,0 +1,110 @@
+.pagina {
+  --fondo: #ecfeff;
+  --panel: #fff;
+  --texto: #164e63;
+  --acento: #0891b2;
+  --borde: #a5f3fc;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #cffafe, var(--fondo));
+  color: var(--texto);
+  transition: 0.25s;
+}
+.pagina[data-theme="dark"] {
+  --fondo: #0f172a;
+  --panel: #164e63;
+  --texto: #ecfeff;
+  --acento: #67e8f9;
+  --borde: #155e75;
+  background: linear-gradient(135deg, #083344, var(--fondo));
+}
+.tema {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  background: var(--panel);
+  color: var(--texto);
+  cursor: pointer;
+}
+.panel {
+  width: min(100%, 480px);
+  padding: 42px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgb(8 47 73 / 20%);
+}
+.eyebrow {
+  color: var(--acento);
+  font-weight: 700;
+}
+.panel h1 {
+  margin: 8px 0 30px;
+}
+.contador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.contador button {
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--acento);
+  color: #083344;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.contador button:hover {
+  transform: scale(1.06);
+}
+output {
+  min-width: 110px;
+  font-size: 4rem;
+  font-weight: 800;
+}
+.reiniciar {
+  margin-top: 30px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 11px 18px;
+  background: transparent;
+  color: var(--texto);
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .pagina {
+    padding: 78px 16px 24px;
+  }
+  .tema {
+    top: 16px;
+    right: 16px;
+  }
+  .panel {
+    padding: 28px 16px;
+  }
+  .contador {
+    gap: 10px;
+  }
+  .contador button {
+    width: 56px;
+    height: 56px;
+  }
+  output {
+    min-width: 82px;
+    font-size: 3rem;
+  }
+}

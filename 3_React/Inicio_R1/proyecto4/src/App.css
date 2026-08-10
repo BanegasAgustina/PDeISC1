@@ -1,0 +1,163 @@
+/* Variables CSS para temas claro/oscuro */
+.pagina {
+  --fondo: #fff7ed;
+  --panel: #fff;
+  --texto: #431407;
+  --muted: #9a3412;
+  --acento: #ea580c;
+  --borde: #fed7aa;
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #ffedd5, var(--fondo));
+  color: var(--texto);
+  transition: .25s;
+}
+
+.pagina[data-theme='dark'] {
+  --fondo: #1c1917;
+  --panel: #431407;
+  --texto: #fff7ed;
+  --muted: #fed7aa;
+  --acento: #fdba74;
+  --borde: #9a3412;
+  background: linear-gradient(135deg, #7c2d12, var(--fondo));
+}
+
+/* Botón de tema (Sol/Luna) */
+.tema {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  /* Tamaño cuadrado para que el ícono quede bonito */
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  background: var(--panel);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.panel {
+  width: min(100%, 660px);
+  padding: clamp(24px, 6vw, 44px);
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  background: var(--panel);
+  box-shadow: 0 24px 60px rgb(67 20 7 / 18%);
+}
+
+.eyebrow { margin: 0; color: var(--acento); font-weight: 700; }
+.panel h1 { margin: 6px 0; }
+.resumen, .vacio { color: var(--muted); }
+
+form { display: flex; gap: 10px; margin: 26px 0; }
+form input {
+  min-width: 0;
+  flex: 1;
+  padding: 13px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--texto);
+}
+
+form button, .eliminar {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: var(--acento);
+  color: #431407;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+
+li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+}
+
+label {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  overflow-wrap: anywhere;
+  flex: 1;
+  min-width: 0;
+}
+
+.completada span { text-decoration: line-through; opacity: .6; }
+
+/* NUEVO: input inline cuando se está editando una tarea */
+.input-editar {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--acento);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--texto);
+  font-size: 1rem;
+}
+
+/* NUEVO: contenedor de los botones de acción de cada tarea */
+.acciones {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* NUEVO: botones pequeños tipo ícono */
+.boton-icono {
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--texto);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background .15s, transform .1s;
+}
+
+.boton-icono:hover { background: var(--borde); transform: translateY(-1px); }
+
+.boton-icono.editar  { border-color: #fbbf24; }
+.boton-icono.guardar { border-color: #22c55e; }
+.boton-icono.cancelar { border-color: #ef4444; }
+
+/* Estilos heredados y responsive */
+.eliminar {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  padding: 8px 10px;
+}
+
+@media(max-width: 480px) {
+  form { flex-direction: column; }
+  .tema { position: absolute; }
+  li { align-items: flex-start; }
+  label { width: 100%; }
+  .acciones { width: 100%; justify-content: flex-end; }
+}
+
+@media (max-width: 480px) {
+  .pagina { padding: 78px 16px 24px; }
+  .tema { top: 16px; right: 16px; }
+  .panel { padding: 24px 16px; }
+}

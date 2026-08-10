@@ -1,0 +1,114 @@
+/* App.css - Estilos del componente App */
+
+/* Variables CSS para tema claro (valores por defecto */
+.pagina {
+  --fondo: #f5f3ff;
+  --tarjeta: #fff;
+  --texto: #2e1065;
+  --muted: #6b7280;
+  --acento: #7c3aed;
+  --borde: #ddd6fe;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #ede9fe, var(--fondo));
+  color: var(--texto);
+  transition: 0.25s;
+}
+
+/* Redefino variables para tema oscuro (se activa con data-theme="dark") */
+.pagina[data-theme="dark"] {
+  --fondo: #111827;
+  --tarjeta: #1f2937;
+  --texto: #f5f3ff;
+  --muted: #c4b5fd;
+  --acento: #c4b5fd;
+  --borde: #4c1d95;
+  background: linear-gradient(135deg, #312e81, var(--fondo));
+}
+
+/* Botón de tema (Sol/Luna) */
+.tema {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  background: var(--tarjeta);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+/* Tarjeta horizontal (layout en fila */
+.tarjeta-presentacion {
+  width: min(100%, 680px);
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  padding: 32px;
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  background: var(--tarjeta);
+  box-shadow: 0 24px 60px rgb(30 27 75 / 20%);
+  transition: transform 0.2s;
+}
+
+/* Efecto hover: sube 6px al pasar el mouse */
+.tarjeta-presentacion:hover {
+  transform: translateY(-6px);
+}
+
+/* Imagen cuadrada con bordes redondeados */
+.tarjeta-presentacion img {
+  width: 180px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+/* Etiqueta decorativa */
+.tarjeta-presentacion span {
+  color: var(--acento);
+  font-weight: 700;
+}
+
+/* Nombre: tamaño responsive con clamp(min, ideal, max) */
+.tarjeta-presentacion h1 {
+  margin: 10px 0;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+}
+
+/* Profesión en color apagado */
+.tarjeta-presentacion p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+/* Responsive móvil (<=560px): tarjeta en columna */
+@media (max-width: 560px) {
+  .tarjeta-presentacion {
+    flex-direction: column;
+    text-align: center;
+  }
+  .tarjeta-presentacion img {
+    width: 140px;
+  }
+  .pagina {
+    padding: 82px 16px 24px;
+  }
+  .tema {
+    top: 16px;
+    right: 16px;
+  }
+  .tarjeta-presentacion {
+    padding: 24px;
+    gap: 20px;
+  }
+}

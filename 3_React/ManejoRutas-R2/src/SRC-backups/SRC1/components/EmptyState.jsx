@@ -1,0 +1,2 @@
+import { Link } from 'react-router-dom'
+export default function EmptyState({ search }) { return <section className="empty-state"><span className="empty-icon">☷</span><h2>{search ? 'No encontramos tareas' : 'No hay tareas todavía'}</h2><p>{search ? 'Probá con otra búsqueda o filtro.' : 'Comenzá creando tu primera tarea y organizá tu día.'}</p>{!search && <Link className="button" to="/crear">Crear tarea</Link>}</section> }

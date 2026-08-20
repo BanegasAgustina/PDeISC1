@@ -1,0 +1,3 @@
+import TaskCard from './TaskCard'
+import { groupLabel } from '../utils/dates'
+export default function TaskList({ tareas, grouped }) { if (!grouped) return <div className="task-list">{tareas.map((tarea) => <TaskCard key={tarea.id} tarea={tarea} />)}</div>; const groups = tareas.reduce((result, tarea) => { const label = groupLabel(tarea.fechaTarea); (result[label] ||= []).push(tarea); return result }, {}); return <div className="task-groups">{Object.entries(groups).map(([label, items]) => <section className="task-group" key={label}><h2>{label}</h2><div className="task-list">{items.map((tarea) => <TaskCard key={tarea.id} tarea={tarea}/>)}</div></section>)}</div> }

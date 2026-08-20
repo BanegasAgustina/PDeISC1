@@ -1,0 +1,2 @@
+import { Search, X } from 'lucide-react'
+export default function TaskSearch({ value, onChange }) { return <label className="search"><Search size={17}/><input value={value} onChange={(e) => onChange(e.target.value)} placeholder="Buscar tareas..." aria-label="Buscar por título o descripción" />{value && <button type="button" onClick={() => onChange('')} aria-label="Limpiar búsqueda"><X size={15}/></button>}</label> }

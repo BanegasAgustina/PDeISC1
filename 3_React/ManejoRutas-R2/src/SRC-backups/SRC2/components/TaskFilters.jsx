@@ -1,0 +1,1 @@
+export default function TaskFilters({ filter, onChange }) { const filters = [['todas', 'Todas'], ['pendientes', 'Pendientes'], ['completadas', 'Completadas']]; return <div className="filters" role="group" aria-label="Filtrar tareas">{filters.map(([id, label]) => <button key={id} className={filter === id ? 'active' : ''} onClick={() => onChange(id)}>{label}</button>)}</div> }
